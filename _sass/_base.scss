@@ -204,3 +204,14 @@ pre {
         }
     }
 }
+
+/**
+ * Excerpt
+ */
+div.excerpt{
+    padding-left: 20px;
+    border-width: 0;
+    border-color: lightgray;
+    border-left-width: 2px;
+    border-style: solid;
+}
