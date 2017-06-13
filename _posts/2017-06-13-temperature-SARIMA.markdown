@@ -216,7 +216,7 @@ stationarity_test(global_temp['LandAverageTemperature'], 'Monthly Mean')
 ```
 
 
-![png]({{ site.url }}/notebooks/Temperature_SARIMA_files/Temperature_SARIMA_9_1.png)
+![png](/notebooks/Temperature_SARIMA_files/Temperature_SARIMA_9_1.png)
 
 
     Results of Dickey-Fuller Test on Monthly Mean:
@@ -251,7 +251,7 @@ plt.suptitle('Original Temperature Data')
 
 
 
-![png]({{ site.url }}/notebooks/Temperature_SARIMA_files/Temperature_SARIMA_10_2.png)
+![png](/notebooks/Temperature_SARIMA_files/Temperature_SARIMA_10_2.png)
 
 
 This data is not stationary. It has an upward trend and strong seasonality. Thus I will first attempt to remove seasonality. As seen below, a seasonal (12 months) difference alone makes the stationarity test statistic smaller than the 1% critical values.
@@ -300,7 +300,7 @@ plt.show()
 ```
 
 
-![png]({{ site.url }}/notebooks/Temperature_SARIMA_files/Temperature_SARIMA_13_1.png)
+![png](/notebooks/Temperature_SARIMA_files/Temperature_SARIMA_13_1.png)
 
 
 Now the data is stationarized, we can proceed to data modeling.
@@ -321,7 +321,7 @@ fig = sm.graphics.tsa.plot_pacf(temp_diff12, lags=40, ax=ax2)
 ```
 
 
-![png]({{ site.url }}/notebooks/Temperature_SARIMA_files/Temperature_SARIMA_17_0.png)
+![png](/notebooks/Temperature_SARIMA_files/Temperature_SARIMA_17_0.png)
 
 
 The seasonal part of the model has a MA(1) term, since there is a spike at lag 12 in the ACF but no other significant spikes, and the PACF shows exponential decay at lag 12x. The non-seasonal part has a AR(2) term, but the MA term is less obvious. After experimenting with the non-seasonal MA term below, I decided the ARIMA(2,0,2)(0,1,1)12 gives the best results. (The experimenting code is commentted out in order to save some run time of this notebook.)
@@ -421,7 +421,7 @@ plt.show()
 ```
 
 
-![png]({{ site.url }}/notebooks/Temperature_SARIMA_files/Temperature_SARIMA_23_0.png)
+![png](/notebooks/Temperature_SARIMA_files/Temperature_SARIMA_23_0.png)
 
 
 
@@ -434,7 +434,7 @@ fig = sm.graphics.tsa.plot_pacf(resid202, lags=40, ax=ax2)
 ```
 
 
-![png]({{ site.url }}/notebooks/Temperature_SARIMA_files/Temperature_SARIMA_24_0.png)
+![png](/notebooks/Temperature_SARIMA_files/Temperature_SARIMA_24_0.png)
 
 
 Neither the ACF or PACF plots of the residuals showed any spikes beside lag 0, indicating the residuals are not autocorrelated.
@@ -462,7 +462,7 @@ print(stats.normaltest(resid202))
 ```
 
 
-![png]({{ site.url }}/notebooks/Temperature_SARIMA_files/Temperature_SARIMA_27_0.png)
+![png](/notebooks/Temperature_SARIMA_files/Temperature_SARIMA_27_0.png)
 
 
     NormaltestResult(statistic=463.76425536589068, pvalue=1.9718391964105937e-101)
@@ -479,7 +479,7 @@ ax = sm.graphics.qqplot(resid202, line='q', fit=True)
 
 
 
-![png]({{ site.url }}/notebooks/Temperature_SARIMA_files/Temperature_SARIMA_28_1.png)
+![png](/notebooks/Temperature_SARIMA_files/Temperature_SARIMA_28_1.png)
 
 
 From the normal test and the Q-Q plot, we can see the residuals are heavy tailed.
@@ -521,7 +521,7 @@ axs[3].legend(loc='center left', bbox_to_anchor=(1.0, 0.5))
 
 x, y = fit_norm(resids[i])
 
-![png]({{ site.url }}/notebooks/Temperature_SARIMA_files/Temperature_SARIMA_32_2.png)
+![png](/notebooks/Temperature_SARIMA_files/Temperature_SARIMA_32_2.png)
 
 
 ## Baseline Comparison
@@ -689,7 +689,7 @@ plt.show()
 ```
 
 
-![png]({{ site.url }}/notebooks/Temperature_SARIMA_files/Temperature_SARIMA_41_0.png)
+![png](/notebooks/Temperature_SARIMA_files/Temperature_SARIMA_41_0.png)
 
 
 ### Residual Analysis
@@ -710,7 +710,7 @@ plt.show()
 ```
 
 
-![png]({{ site.url }}/notebooks/Temperature_SARIMA_files/Temperature_SARIMA_43_0.png)
+![png](/notebooks/Temperature_SARIMA_files/Temperature_SARIMA_43_0.png)
 
 
 We can see from the figures above that the Alt Model 1 (Persistence) has very scattered residuals (aka the errors are large). The residuals of Alt Model 2 (Overly Simplified Seasonal) seems to have a upward trend, which is undesirable.
@@ -743,7 +743,7 @@ plt.show()
 
 
 
-![png]({{ site.url }}/notebooks/Temperature_SARIMA_files/Temperature_SARIMA_45_1.png)
+![png](/notebooks/Temperature_SARIMA_files/Temperature_SARIMA_45_1.png)
 
 
 
@@ -765,7 +765,7 @@ plt.show()
 ```
 
 
-![png]({{ site.url }}/notebooks/Temperature_SARIMA_files/Temperature_SARIMA_46_0.png)
+![png](/notebooks/Temperature_SARIMA_files/Temperature_SARIMA_46_0.png)
 
 
 In the plots of the residuals against the fitted values above, we can see both of the alternative models showed patterns (again, undesirable), whereas the seasonal ARIMA model produced residuals scattered randomly around the line y = 0 (expected). 
