@@ -145,6 +145,22 @@ pre {
     fill: #828282; }
 
 /**
+ * Tables
+ */
+div.table {
+  overflow-x: scroll; }
+
+/**
+ * Excerpt
+ */
+div.excerpt {
+  padding-left: 20px;
+  border-width: 0;
+  border-color: lightgray;
+  border-left-width: 2px;
+  border-style: solid; }
+
+/**
  * Site header
  */
 .site-header {
