@@ -6,8 +6,8 @@
 </description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Wed, 14 Jun 2017 17:21:04 -0400</pubDate>
-    <lastBuildDate>Wed, 14 Jun 2017 17:21:04 -0400</lastBuildDate>
+    <pubDate>Wed, 14 Jun 2017 17:39:58 -0400</pubDate>
+    <lastBuildDate>Wed, 14 Jun 2017 17:39:58 -0400</lastBuildDate>
     <generator>Jekyll v3.4.3</generator>
     
       <item>
@@ -65,7 +65,7 @@
 &lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 
-&lt;p&gt;&lt;img src=&quot;notebooks/Assault_vs_Poverty_files/Assault_vs_Poverty_5_1.png&quot; alt=&quot;png&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/notebooks/Assault_vs_Poverty_files/Assault_vs_Poverty_5_1.png&quot; alt=&quot;png&quot; /&gt;&lt;/p&gt;
 
 &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;# Barchart of Poverty_Percentage by State
 &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;barchart&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Poverty_Percentage&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;~&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;State&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;data&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;combined&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;groups&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Year&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;scales&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;list&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;list&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;rot&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;90&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)),&lt;/span&gt;
@@ -74,7 +74,7 @@
 &lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 
-&lt;p&gt;&lt;img src=&quot;notebooks/Assault_vs_Poverty_files/Assault_vs_Poverty_6_1.png&quot; alt=&quot;png&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/notebooks/Assault_vs_Poverty_files/Assault_vs_Poverty_6_1.png&quot; alt=&quot;png&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;The graphs show that for most states, neither Assault_Death_Rate or Poverty_Percentage vary dramatically during 2013-2015. Thus I decided the three year data could be summarized sufficiently by the three-year mean.&lt;/p&gt;
 
@@ -113,7 +113,7 @@
 &lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 
-&lt;p&gt;&lt;img src=&quot;notebooks/Assault_vs_Poverty_files/Assault_vs_Poverty_9_0.png&quot; alt=&quot;png&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/notebooks/Assault_vs_Poverty_files/Assault_vs_Poverty_9_0.png&quot; alt=&quot;png&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;The bar graph above indicates there is correlation between the assault death rate and the poverty rate. The corrlation can be calculated as:&lt;/p&gt;
 
@@ -130,7 +130,7 @@
 &lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 
-&lt;p&gt;&lt;img src=&quot;notebooks/Assault_vs_Poverty_files/Assault_vs_Poverty_13_0.png&quot; alt=&quot;png&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/notebooks/Assault_vs_Poverty_files/Assault_vs_Poverty_13_0.png&quot; alt=&quot;png&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;Of course, in real life there are a lot more nuances we need to consider to fully explore the relationship between the assault death rate and the poverty rate. For example, we may need to ask whether aggregation at the state level is appropriate. And of course correlation does not imply causation. Nevertheless, this exploration of public data set demonstrated the use of SQLite and R as useful open source data analysis tools.&lt;/p&gt;
 </description>

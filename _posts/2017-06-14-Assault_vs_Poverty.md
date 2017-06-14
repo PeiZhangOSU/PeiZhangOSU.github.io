@@ -68,7 +68,7 @@ barchart(Assault_Death_Rate ~ State, data = combined, groups = Year, scales = li
 
 
 
-![png](notebooks/Assault_vs_Poverty_files/Assault_vs_Poverty_5_1.png)
+![png](/notebooks/Assault_vs_Poverty_files/Assault_vs_Poverty_5_1.png)
 
 
 
@@ -82,7 +82,7 @@ barchart(Poverty_Percentage ~ State, data = combined, groups = Year, scales = li
 
 
 
-![png](notebooks/Assault_vs_Poverty_files/Assault_vs_Poverty_6_1.png)
+![png](/notebooks/Assault_vs_Poverty_files/Assault_vs_Poverty_6_1.png)
 
 
 The graphs show that for most states, neither Assault_Death_Rate or Poverty_Percentage vary dramatically during 2013-2015. Thus I decided the three year data could be summarized sufficiently by the three-year mean.
@@ -128,7 +128,7 @@ grid.arrange(p1, p2, ncol=2, widths = c(1.3, 2))
 ```
 
 
-![png](notebooks/Assault_vs_Poverty_files/Assault_vs_Poverty_9_0.png)
+![png](/notebooks/Assault_vs_Poverty_files/Assault_vs_Poverty_9_0.png)
 
 
 The bar graph above indicates there is correlation between the assault death rate and the poverty rate. The corrlation can be calculated as:
@@ -151,7 +151,7 @@ abline(lm(Assault_Death_Rate ~ Poverty_Percentage, data = combined_mean))
 ```
 
 
-![png](notebooks/Assault_vs_Poverty_files/Assault_vs_Poverty_13_0.png)
+![png](/notebooks/Assault_vs_Poverty_files/Assault_vs_Poverty_13_0.png)
 
 
 Of course, in real life there are a lot more nuances we need to consider to fully explore the relationship between the assault death rate and the poverty rate. For example, we may need to ask whether aggregation at the state level is appropriate. And of course correlation does not imply causation. Nevertheless, this exploration of public data set demonstrated the use of SQLite and R as useful open source data analysis tools.

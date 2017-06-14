@@ -10,7 +10,7 @@ layout: default
     {% if page.tags %}
       Tags:
       {% for tag in page.tags %}
-      <a href="{{ site.baseurl }}{{ site.tag_page }}#{{ tag | slugify }}" class="post-tag">{{ tag }}</a>
+      <a href="{{ site.baseurl }}{{ site.tag_page }}#{{ tag | slugify }}" class="post-tag">{{ tag }}</a>  &emsp;
       {% endfor %}
       {% endif %}
 
