@@ -2,15 +2,15 @@
 layout: post
 title:  "Exploring Historical Global Temperatures"
 date:   2017-06-13 16:59:00 -0400
-category: blog
-tags: 
+tags:
 - Jupyter Notebook
 - Python
+- Time Series
 ---
 
 The original Jupyter notebook can be viewed [here](https://github.com/PeiZhangOSU/GlobalTemperatures/blob/master/Global%20Temperature%20Notebook%20-%20SARIMA.ipynb).
 
-This is a time series modeling exercise based on the Kaggle dataset [Climate Change: Earth Surface Temperature Data](http://www.kaggle.com/berkeleyearth/climate-change-earth-surface-temperature-data). The raw data comes from [the Berkeley Earth data page](http://berkeleyearth.org/data/). 
+This is a time series modeling exercise based on the Kaggle dataset [Climate Change: Earth Surface Temperature Data](http://www.kaggle.com/berkeleyearth/climate-change-earth-surface-temperature-data). The raw data comes from [the Berkeley Earth data page](http://berkeleyearth.org/data/).
 <!--more-->
 
 Here I use 'LandAverageTemperature' from the dataset Global Land and Ocean-and-Land Temperatures (GlobalTemperatures.csv):
@@ -47,7 +47,7 @@ import scipy.stats as stats
 global_temp = pd.read_csv('GlobalTemperatures.csv')
 ```
 
-Set the date to be the index, and drop NA values. 
+Set the date to be the index, and drop NA values.
 
 Here I only used data starting from 1850, because I am not sure whether the data before 1850 was collected with the same method.
 
@@ -205,7 +205,7 @@ def stationarity_test(s, name = None):
         print('Results of Dickey-Fuller Test on %s:'%name)
     else:
         print('Results of Dickey-Fuller Test:')
-    
+
     df_test = sm.tsa.stattools.adfuller(s)
     df_result = pd.Series(df_test[0:4], index=['Test Statistic','p-value','#Lags Used','Number of Observations Used'])
     for key,value in df_test[4].items():
@@ -328,22 +328,22 @@ The seasonal part of the model has a MA(1) term, since there is a spike at lag 1
 
 
 ```python
-# mod000 = sm.tsa.statespace.SARIMAX(global_temp['LandAverageTemperature'], order=(0,0,0), 
-#                                    seasonal_order=(0,1,1,12), enforce_stationarity = False, 
+# mod000 = sm.tsa.statespace.SARIMAX(global_temp['LandAverageTemperature'], order=(0,0,0),
+#                                    seasonal_order=(0,1,1,12), enforce_stationarity = False,
 #                                    enforce_invertibility = False).fit()
 
-# mod201 = sm.tsa.statespace.SARIMAX(global_temp['LandAverageTemperature'], order=(2,0,1), 
-#                                    seasonal_order=(0,1,1,12), enforce_stationarity = False, 
-#                                    enforce_invertibility = False).fit()
-
-
-# mod202 = sm.tsa.statespace.SARIMAX(global_temp['LandAverageTemperature'], order=(2,0,2), 
-#                                    seasonal_order=(0,1,1,12), enforce_stationarity = False, 
+# mod201 = sm.tsa.statespace.SARIMAX(global_temp['LandAverageTemperature'], order=(2,0,1),
+#                                    seasonal_order=(0,1,1,12), enforce_stationarity = False,
 #                                    enforce_invertibility = False).fit()
 
 
-# mod205 = sm.tsa.statespace.SARIMAX(global_temp['LandAverageTemperature'], order=(2,0,5), 
-#                                    seasonal_order=(0,1,1,12), enforce_stationarity = False, 
+# mod202 = sm.tsa.statespace.SARIMAX(global_temp['LandAverageTemperature'], order=(2,0,2),
+#                                    seasonal_order=(0,1,1,12), enforce_stationarity = False,
+#                                    enforce_invertibility = False).fit()
+
+
+# mod205 = sm.tsa.statespace.SARIMAX(global_temp['LandAverageTemperature'], order=(2,0,5),
+#                                    seasonal_order=(0,1,1,12), enforce_stationarity = False,
 #                                    enforce_invertibility = False).fit()
 
 # print('Model', 'AIC', 'BIC', 'HQIC')
@@ -363,8 +363,8 @@ The seasonal part of the model has a MA(1) term, since there is a spike at lag 1
 
 
 ```python
-mod202 = sm.tsa.statespace.SARIMAX(global_temp['LandAverageTemperature'], order = (2, 0, 2), 
-                                   seasonal_order=(0,1,1,12), enforce_stationarity = False, 
+mod202 = sm.tsa.statespace.SARIMAX(global_temp['LandAverageTemperature'], order = (2, 0, 2),
+                                   seasonal_order=(0,1,1,12), enforce_stationarity = False,
                                    enforce_invertibility = False).fit()
 print('Model', 'AIC', 'BIC', 'HQIC')
 print('ARIMA(2,0,2)x(0,1,1)_12', mod202.aic, mod202.bic, mod202.hqic)
@@ -403,7 +403,7 @@ print(mod202.summary())
     Heteroskedasticity (H):               0.55   Skew:                             0.13
     Prob(H) (two-sided):                  0.00   Kurtosis:                         4.85
     ===================================================================================
-    
+
     Warnings:
     [1] Covariance matrix calculated using the outer product of gradients.
     [2] Covariance matrix is singular or near-singular, with condition number 2.56e+43. Standard errors may be unstable.
@@ -486,7 +486,7 @@ From the normal test and the Q-Q plot, we can see the residuals are heavy tailed
 
 ## Making Predictions
 
-I use this ARIMA(2,0,2)x(0,1,1)\_12 model from above to make in-sample and out-of-sample predictions. The date of last entry in the historical data is 2015-12-01. We will make a five year prediction afterwards only for the sake of learning. Of courese in reality, five-year-ahead weather prediction is almost guaranteed unrealiable. 
+I use this ARIMA(2,0,2)x(0,1,1)\_12 model from above to make in-sample and out-of-sample predictions. The date of last entry in the historical data is 2015-12-01. We will make a five year prediction afterwards only for the sake of learning. Of courese in reality, five-year-ahead weather prediction is almost guaranteed unrealiable.
 
 
 ```python
@@ -526,13 +526,13 @@ x, y = fit_norm(resids[i])
 
 ## Baseline Comparison
 
-Now I have a working model, I would like to see how it compares against some baseline models. Nate Silver mentions in his book "The Signal and the Noise" with respect to weather forecasting: 
+Now I have a working model, I would like to see how it compares against some baseline models. Nate Silver mentions in his book "The Signal and the Noise" with respect to weather forecasting:
 
-"There are two basic tests that any weather forecast must pass to demonstrate its merit: 
-1. It must do better than what meteorologists call persistence: the assumption that the weather will be the same tomorrow (and the next day) as it was today. 
+"There are two basic tests that any weather forecast must pass to demonstrate its merit:
+1. It must do better than what meteorologists call persistence: the assumption that the weather will be the same tomorrow (and the next day) as it was today.
 2. It must also beat climatology, the long-term historical average of conditions on a particular date in a particular area."
 
-Thus I will build these two baseline models accordingly for comparison. 
+Thus I will build these two baseline models accordingly for comparison.
 
 ### Alt Model 1: Persistence
 
@@ -546,9 +546,9 @@ predict_altmod1['observed'] = global_temp['LandAverageTemperature']
 
 predict_altmod1['forecast'] = global_temp['LandAverageTemperature'].shift(1)
 predict_altmod1.loc['1850-01-01', 'forecast'] = global_temp.loc['1850-01-01', 'LandAverageTemperature']
-last_observed = global_temp['LandAverageTemperature'].iloc[-1] 
+last_observed = global_temp['LandAverageTemperature'].iloc[-1]
 # all out-of-sample predictions are the same as the last temperature entry in the original data set (observed)
-predict_altmod1['forecast'].fillna(last_observed, inplace = True) 
+predict_altmod1['forecast'].fillna(last_observed, inplace = True)
 
 predict_altmod1['resid'] = predict_altmod1['observed'] - predict_altmod1['forecast']
 
@@ -723,10 +723,10 @@ for i in range(3):
     plt.sca(axs[i])
     axs[i].set_title(mod_names[i])
     plt.hist(resids[i], bins = 30, normed = True, label = 'Residuals')
-    
+
     x, y = fit_norm(resids[i])
     plt.plot(x, y,'k--', label = 'Normal Curve')
-    
+
     print(mod_names[i], stats.normaltest(resids[i]))
 
 fig.suptitle('Residuals - Histogram', size = 16)
@@ -768,7 +768,7 @@ plt.show()
 ![png](/notebooks/Temperature_SARIMA_files/Temperature_SARIMA_46_0.png)
 
 
-In the plots of the residuals against the fitted values above, we can see both of the alternative models showed patterns (again, undesirable), whereas the seasonal ARIMA model produced residuals scattered randomly around the line y = 0 (expected). 
+In the plots of the residuals against the fitted values above, we can see both of the alternative models showed patterns (again, undesirable), whereas the seasonal ARIMA model produced residuals scattered randomly around the line y = 0 (expected).
 
 ###  Forecast Performance:
 
@@ -780,10 +780,10 @@ print('{:<30s}{:<10s}{:<10s}'.format('Model', 'RMSE', 'MAE'))
 print('-' * 50)
 
 for i in range(3):
-    print('{:<30s}{:<10.4f}{:<10.4f}'.format(mod_names[i], 
-                                    sm.tools.eval_measures.rmse(global_temp['LandAverageTemperature'], 
+    print('{:<30s}{:<10.4f}{:<10.4f}'.format(mod_names[i],
+                                    sm.tools.eval_measures.rmse(global_temp['LandAverageTemperature'],
                                                                 predicts[i][:'2015-12-01']),
-                                    sm.tools.eval_measures.meanabs(global_temp['LandAverageTemperature'], 
+                                    sm.tools.eval_measures.meanabs(global_temp['LandAverageTemperature'],
                                                                     predicts[i][:'2015-12-01'])))
 ```
 
