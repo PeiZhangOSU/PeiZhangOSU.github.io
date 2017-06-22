@@ -18,7 +18,7 @@ Source of original data:
 - Assault: https://wonder.cdc.gov, Compressed Mortality, 2013-2015, ICD-10 codes: X85-Y09 (Assault)
 - Poverty: https://www.census.gov/data/tables/time-series/demo/income-poverty/historical-poverty-people.html, Table 19. Percent of Persons in Poverty, by State, 2013-2015
 
-I generated a csv file [combined.csv](https://github.com/PeiZhangOSU/Assault-and-Poverty/blob/master/combined.csv) using SQLite, which contains 4 columns:
+I generated a csv file [combined.csv](https://github.com/PeiZhangOSU/Assault-and-Poverty/blob/master/combined.csv) using SQLite (see [here](https://github.com/PeiZhangOSU/Assault-and-Poverty/blob/master/SQL%20queries.sql) for the SQL queries), which contains 4 columns:
 1. State: State names
 2. Year: Year of the data, 2013-2015
 3. Assault_Death_Rate: Rates of death from assault per 100,000 (using 2000 U.S. Std. Population), age adjusted
