@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "The meaning of 'significant'"
+title:  "The Meaning of 'Significant'"
 date:   2017-07-10 10:38:00 -0400
 tags:
 - Statistics
