@@ -7,3 +7,4 @@ _site/
 .ipynb_checkpoints
 Gemfile
 Gemfile.lock
+.xcf

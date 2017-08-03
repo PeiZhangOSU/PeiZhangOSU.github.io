@@ -6,9 +6,119 @@
 </description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Wed, 14 Jun 2017 17:39:58 -0400</pubDate>
-    <lastBuildDate>Wed, 14 Jun 2017 17:39:58 -0400</lastBuildDate>
+    <pubDate>Thu, 03 Aug 2017 15:46:53 -0400</pubDate>
+    <lastBuildDate>Thu, 03 Aug 2017 15:46:53 -0400</lastBuildDate>
     <generator>Jekyll v3.4.3</generator>
+    
+      <item>
+        <title>TV Tropes Analysis Part 1</title>
+        <description>&lt;p&gt;This is a proposal of a data project I have been working on: analyze trope usage in movies using data from TV Tropes and IMDB.&lt;/p&gt;
+
+&lt;!--more--&gt;
+
+&lt;h1 id=&quot;what-are-tv-tropes-why-study-them&quot;&gt;What Are TV Tropes? Why Study Them?&lt;/h1&gt;
+
+&lt;p&gt;Tropes are commonly recurring conventions and devices found within various creative works. It is not difficult to recognize a trope when we see it. We can all recognize the Mad Scientist, The Cowboy Cop, or The Chosen One. Overused tropes will probably make us roll our eyes, but the tropes themselves are actually essential to storytelling. Quoting from the famous &lt;a href=&quot;http://tvtropes.org&quot;&gt;TV Tropes website&lt;/a&gt; that collects pop-culture trope descriptions and examples, “Tropes are not inherently disruptive to a story; however, when the trope itself becomes intrusive, distracting the viewer rather than serving as shorthand, it has become a cliché.” Thus, exploring how tropes are used in creative works can help the audience appreciate the various tropes and their function in storytelling, and more importantly, help the creators identify successful and trending plot devices that they can incorporate in their own works.&lt;/p&gt;
+
+&lt;h1 id=&quot;the-tv-tropes-data-source&quot;&gt;The TV Tropes Data Source&lt;/h1&gt;
+
+&lt;p&gt;The TV Tropes website adopts a wiki style. A typical trope page looks like this:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/notebooks/TV_Tropes_files/TVTropes_trope_page.png&quot; width=&quot;500&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;And a typical film page looks like this:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/notebooks/TV_Tropes_files/TVTropes_film_page.png&quot; width=&quot;500&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;The data I am interested in collecting is which tropes each movie includes. In other words, I would like to build a dictionary that is something like {movie: [trope1, trope2, …]}.&lt;/p&gt;
+
+&lt;p&gt;Since the TV Tropes website does not encourage web scrapping, I decided to use &lt;a href=&quot;http://skipforward.opendfki.de/wiki/DBTropes&quot;&gt;DBTropes.org&lt;/a&gt; instead, which is a Linked Data wrapper for TVTropes.org. On their website, they host a downloadable snapshot of &lt;a href=&quot;http://dbtropes.org/static/dbtropes.zip&quot;&gt;all data in NTriples format&lt;/a&gt;, which looks like this:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&amp;lt;http://dbtropes.org/resource/WesternAnimation/TheHobbit&amp;gt; &amp;lt;http://www.w3.org/2000/01/rdf-schema#comment&amp;gt; &quot;The Rankin/Bass adaptation of The Hobbit has an animesque style similar to their adaptation of The Last Unicorn. It might have to do with the fact it was animated by Topcraft, which would later make Nausica\u00E4 of the Valley of the Wind . It also has a lot of Celebrity Voice Actors, including John Huston as Gandalf.Followed up by R-B's adaptation of The Return of the King.&quot;@en .
+&amp;lt;http://dbtropes.org/resource/WesternAnimation/TheHobbit&amp;gt; &amp;lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#type&amp;gt; &amp;lt;http://dbtropes.org/ont/TVTItem&amp;gt; .
+&amp;lt;http://dbtropes.org/resource/WesternAnimation/TheHobbit&amp;gt; &amp;lt;http://skipforward.net/skipforward/resource/seeder/skipinions/hasFeature&amp;gt; &amp;lt;http://dbtropes.org/resource/WesternAnimation/TheHobbit/int_4bb330be&amp;gt; .
+&amp;lt;http://dbtropes.org/resource/WesternAnimation/TheHobbit&amp;gt; &amp;lt;http://skipforward.net/skipforward/resource/seeder/skipinions/hasFeature&amp;gt; &amp;lt;http://dbtropes.org/resource/WesternAnimation/TheHobbit/int_9b945553&amp;gt; .
+&amp;lt;http://dbtropes.org/resource/WesternAnimation/TheHobbit&amp;gt; &amp;lt;http://www.w3.org/2000/01/rdf-schema#seeAlso&amp;gt; &amp;lt;http://dbtropes.org/resource/Main/Animesque&amp;gt; .
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;h1 id=&quot;the-imdb-data-source&quot;&gt;The IMDB Data Source&lt;/h1&gt;
+
+&lt;p&gt;The IMDB website also prohibits web scrapping. To get information of the movies (eg. genre, release date, director, IMDB ranking, etc.), I used the &lt;a href=&quot;https://github.com/richardasaurus/imdb-pie&quot;&gt;ImdbPie library&lt;/a&gt;, a Python IMDB client using the IMDB json web service made available for their iOS app.&lt;/p&gt;
+
+&lt;h1 id=&quot;what-questions-am-i-after&quot;&gt;What Questions Am I After?&lt;/h1&gt;
+&lt;p&gt;Knowing the tropes each movie contains, as well as some basic information about the movies themselves, I can search for the answers to the following questions:&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Are there any “special” tropes that are seen a lot more / a lot less often in highly rated films?&lt;/li&gt;
+  &lt;li&gt;What are the most popular tropes in each film genre? Are there any of the tropes that are associated with good films in certain genres, but not so much for other genres?&lt;/li&gt;
+  &lt;li&gt;How has the usage of tropes changed with time? Which tropes are particularly trending now?&lt;/li&gt;
+  &lt;li&gt;Can trope profiles be an indicator of film rankings?&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h1 id=&quot;preliminary-analysis&quot;&gt;Preliminary Analysis&lt;/h1&gt;
+&lt;p&gt;(The code for this preliminary analysis can be viewed in &lt;a href=&quot;https://github.com/PeiZhangOSU/TV_trope_analysis/blob/master/TVtropes%20GitHub.ipynb&quot;&gt;this Jupyter Notebook&lt;/a&gt;. )&lt;/p&gt;
+
+&lt;p&gt;I wrote &lt;a href=&quot;https://github.com/PeiZhangOSU/TV_trope_analysis/blob/master/extract_film_data.py&quot;&gt;this script&lt;/a&gt; to extract only the data for movies (rather than books, games, etc.) from the DBTropes data set. This subset of data were then parsed using &lt;a href=&quot;https://github.com/RDFLib/rdflib&quot;&gt;the rdflib library&lt;/a&gt;, resulting my desired dictionary that correlates movies with tropes they contain.&lt;/p&gt;
+
+&lt;p&gt;For exploratory data analysis, I examined the frequencies of tropes in two groups: (A) the “overall group”: tropes that appeared in at least one film in the DBTropes database; (B) the “top rated group”: a subgroup of the previous group, consisted of tropes that appeared in at least one film of the IMDB top 250 films. The plot below shows the difference of trope frequencies in each group:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/notebooks/TV_Tropes_files/trope_scatter.png&quot; alt=&quot;png&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;In this scatter plot, each dot represent a trope. Each dot’s x value is its frequency among all films, while the y value is its frequency among the top rated films. The dots above the diagonal line of y = x (teal colored) are tropes that have higher frequency in the top rated films than in all the films, and the dots below the diagonal line (red colored) are tropes with lower frequency in the top rated films. While most of the dots locate around the diagonal line (meaning these tropes are not “special” – they are not overrepresented nor underrepresented in the top rated films), those that are farther from the diagonal line could be our candidates for “special” tropes.&lt;/p&gt;
+
+&lt;p&gt;Now let’s zoom in on the 25 most popular tropes among the IMDB top 250 films:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/notebooks/TV_Tropes_files/most_popular_tropes_top_films.png&quot; alt=&quot;png&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Clearly the pattern of frequency is different in the overall group. The red bars represent the tropes that are seen less often in top films (eg. the most popular trope, “Shout Out”); whereas the teal bars represent the tropes that are more commonly seen in top films (eg. “Oh Crap” – the top films are probably more intense!).&lt;/p&gt;
+
+&lt;p&gt;Altogether, I am confident that the answer to the aforementioned Question 1 is yes – we do have “special” tropes whose presence/absence are associated with film success. For the other three questions, I plan to perform the following analysis:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;For Question 2: Analyze the frequencies of tropes in each genre.&lt;/li&gt;
+  &lt;li&gt;For Question 3: Analyze the frequencies of tropes during each decade of releasing date. Fine tune the time period if needed.
+(It would be optimal to present the results of Q1-Q3 in an interactive visualization format, like a Tableu visualization or a web page/app, where the user can filter and highlight the film genre / year and tropes.)&lt;/li&gt;
+  &lt;li&gt;For Question 4: Perform supervised learning with tropes (most likely, selected tropes) as features, IMDB rankings as targets. It is possible that other information of the film could be features too, such as genre and year. I plan to start from random forest algorithm.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;All of the results will provide more insight on the domain knowledge about tropes in storytelling. It will benefit the users who want to find inspiration for their creative work, and understand the trend of trope usage.&lt;/p&gt;
+</description>
+        <pubDate>Thu, 03 Aug 2017 12:55:00 -0400</pubDate>
+        <link>http://localhost:4000/2017/08/03/TV-Tropes-Analysis-Part-1/</link>
+        <guid isPermaLink="true">http://localhost:4000/2017/08/03/TV-Tropes-Analysis-Part-1/</guid>
+        
+        <category>Python</category>
+        
+        
+      </item>
+    
+      <item>
+        <title>The meaning of 'significant'</title>
+        <description>&lt;p&gt;I am sure all researchers have encountered and/or performed hypothesis testing at one point or another. Even if you are not a researcher by trade, it is very likely you have heard the term “p-value” or “the result is significant” from the news.&lt;/p&gt;
+
+&lt;p&gt;But what does “significant” mean? &lt;!--more--&gt; According to &lt;a href=&quot;https://en.wikipedia.org/wiki/Statistical_significance&quot;&gt;wikipedia&lt;/a&gt;, statistical significance means “the significance level defined for a study, α, is the probability of the study rejecting the null hypothesis, given that it were true; and the p-value of a result, p, is the probability of obtaining a result at least as extreme, given that the null hypothesis were true. The result is statistically significant, by the standards of the study, when p &amp;lt; α.” Not exactly simple and straightforward, which is probably one of the reasons for the many confusion and misunderstandings about what is “significant”.&lt;/p&gt;
+
+&lt;p&gt;There are numerous articles explaining the meaning of statistical significance and correcting its common misinterpretations &lt;sup&gt;&lt;a href=&quot;#myfootnote1&quot;&gt;1&lt;/a&gt;&lt;/sup&gt;. Recently, I read a good explanation from an etymology perspective in the book “The Lady Tasting Tea - How Statistics Revolutionized Science in the Twentieth Century” by David Salsburg:&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Somewhere early in the development of this general idea, the word &lt;em&gt;significant&lt;/em&gt; came to be used to indicate that the probability was low enough for rejection. Data became significant if they could be used to reject a proposed distribution. The word was used in its late-nineteenth-century English meaning, which is simply that the computation signified or showed something. As the English language entered the twentieth century, the word significant began to take on other meanings, until it developed its current meaning, implying something very important. Statistical analysis still uses the word significant to indicate a very low probability computed under the hypothesis being tested. In that context, the word has an exact mathematical meaning. Unfortunately, those who use statistical analysis often treat a significant test statistic as implying something much closer to the modern meaning of the word.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;It is helpful to remember that in the context of statistics, “significant” originally meant “able to signify”, instead of “important”. It does not indicate anything about the plausibility of the hypothesis nor the importance of the results.&lt;/p&gt;
+
+&lt;h5 id=&quot;a-namemyfootnote11a-in-particular-i-would-like-to-mention-this-paper-titled-statistical-tests-p-values-confidence-intervals-and-power-a-guide-to-misinterpretations-greenland-s-senn-sj-rothman-kj-et-al-eur-j-epidemiol-2016-31-337-doi101007s10654-016-0149-3-it-lists-25-common-misinterpretations-of-hypothesis-testing-and-explains-why-they-are-wrong&quot;&gt;&lt;a name=&quot;myfootnote1&quot;&gt;1&lt;/a&gt;: In particular, I would like to mention this paper titled “Statistical tests, P values, confidence intervals, and power: a guide to misinterpretations” (Greenland, S., Senn, S.J., Rothman, K.J. et al. Eur J Epidemiol (2016) 31: 337. doi:10.1007/s10654-016-0149-3). It lists 25 common misinterpretations of hypothesis testing, and explains why they are wrong.&lt;/h5&gt;
+</description>
+        <pubDate>Mon, 10 Jul 2017 10:38:00 -0400</pubDate>
+        <link>http://localhost:4000/2017/07/10/the-meaning-of-significant/</link>
+        <guid isPermaLink="true">http://localhost:4000/2017/07/10/the-meaning-of-significant/</guid>
+        
+        <category>Statistics</category>
+        
+        <category>Misc</category>
+        
+        
+      </item>
     
       <item>
         <title>Exploring the Rates of Assault Death and Poverty</title>
@@ -22,7 +132,7 @@
 - Assault: https://wonder.cdc.gov, Compressed Mortality, 2013-2015, ICD-10 codes: X85-Y09 (Assault)
 - Poverty: https://www.census.gov/data/tables/time-series/demo/income-poverty/historical-poverty-people.html, Table 19. Percent of Persons in Poverty, by State, 2013-2015&lt;/p&gt;
 
-&lt;p&gt;I generated a csv file &lt;a href=&quot;https://github.com/PeiZhangOSU/Assault-and-Poverty/blob/master/combined.csv&quot;&gt;combined.csv&lt;/a&gt; using SQLite, which contains 4 columns:
+&lt;p&gt;I generated a csv file &lt;a href=&quot;https://github.com/PeiZhangOSU/Assault-and-Poverty/blob/master/combined.csv&quot;&gt;combined.csv&lt;/a&gt; using SQLite (see &lt;a href=&quot;https://github.com/PeiZhangOSU/Assault-and-Poverty/blob/master/SQL%20queries.sql&quot;&gt;here&lt;/a&gt; for the SQL queries), which contains 4 columns:
 1. State: State names
 2. Year: Year of the data, 2013-2015
 3. Assault_Death_Rate: Rates of death from assault per 100,000 (using 2000 U.S. Std. Population), age adjusted
